@@ -14,6 +14,9 @@ def add_aon_lines(df, n, num_std=1):
 
 
 def main():
+    if len(sys.argv != 2):
+        print(f"Usage: {sys.argv[0]} <cstimer_export_file>")
+        sys.exit(1)
     with open(sys.argv[1], "r") as f:
         data = json.load(f)
     sessions = {f"session{sess_num}": sess_props["name"] for sess_num, sess_props in json.loads(data["properties"]["sessionData"]).items()}
