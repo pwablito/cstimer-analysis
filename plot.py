@@ -31,7 +31,10 @@ def main():
         dates_session = [dt.fromtimestamp(row[-1]) for row in data_session]
         df = pd.DataFrame({"times": times_session}, index=dates_session)
         add_aon_lines(df, 100)
-        df.plot()
+        plt.scatter(df.index, df['times'])
+        df = df.drop(columns=["times"])
+        for col in df.columns:
+            plt.plot(df.index, df[col])
         plt.title(session_name)
         plt.savefig(f"{session_name}.png")
         plt.clf()
